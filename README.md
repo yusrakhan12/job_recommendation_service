@@ -136,3 +136,31 @@ Tested the API using cURL
   }
 ]
 ----
+8.  Matching Logic
+## Matching Logic
+The recommendation algorithm matches users with job postings based on:
+- **Skills Matching**: Compares the user's skills against required skills 
+for each job posting.
+- **Experience Level**: Ensures that the experience level of the user 
+aligns with the job requirements.
+- **Job Type and Location**: Filters job postings based on user 
+preferences for job type and location.
+
+9.
+## Challenges Faced
+1. **Data Validation**: Ensuring proper input format was crucial to avoid 
+runtime errors. I implemented error handling to return meaningful messages 
+for incorrect inputs.
+2. **Database Connection**: Managing database connections and ensuring 
+proper closure was a challenge. I utilized context managers for better 
+handling.
+3. **Testing the API**: Ensuring the API returned accurate recommendations 
+required multiple test cases. I developed unit tests to cover various 
+scenarios.
+
+
+10.
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) 
+file for more details.
+
