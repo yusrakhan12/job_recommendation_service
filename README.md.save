@@ -1,0 +1,36 @@
+# Job Recommendation API
+
+## Overview
+This API provides job recommendations based on user profiles, including 
+skills, experience levels, and job preferences. It helps users find 
+relevant job postings that match their qualifications and desired work 
+conditions.
+This job recommendation service helps users find suitable job postings by 
+matching their profiles with available job requirements. The service 
+evaluates user skills, experience levels, and preferences to deliver 
+personalized job suggestions.
+
+## Technologies Used
+- **Python**: Programming language used for backend development.
+- **Flask**: A lightweight web framework for building RESTful APIs.
+- **SQLite**: A self-contained, serverless database engine used for data 
+storage.
+
+## Features
+- User profile management: Store user information, skills, and 
+preferences.
+- Job posting management: Store job details and requirements.
+- Recommendation engine: Match user profiles with relevant job postings.
+- Easy-to-use API for clients to interact with the service.
+
+## Setup Instructions
+
+### Prerequisites
+- Ensure you have Python 3 and SQLite installed on your machine.
+
+### Steps to Set Up
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+
