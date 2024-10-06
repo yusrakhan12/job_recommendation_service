@@ -1,166 +1,119 @@
-# Job Recommendation Service
+##Job recommendation service
+###An overview
 
-## Overview
-This job recommendation service helps users find suitable job postings by 
-matching their profiles with available job requirements. The service 
-evaluates user skills, experience levels, and preferences to deliver 
-personalized job suggestions.
+The Job recommendation Service helps users find a number of suited job 
+postings by matching profiles with available job requirements. Each job 
+suggestion is tailored to the user after taking into account the user's 
+skills, experience level, and preference.
 
-## Technologies Used
-- **Python**: Programming language used for backend development.
-- **Flask**: A lightweight web framework for building RESTful APIs.
-- **SQLite**: A self-contained, serverless database engine used for data 
-storage.
+###Technologies Utilized
 
-## Features
-- User profile management: Store user information, skills, and 
-preferences.
-- Job posting management: Store job details and requirements.
-- Recommendation engine: Match user profiles with relevant job postings.
-- Easy-to-use API for clients to interact with the service.
+Python: This be the programming language employed as the backbone for 
+back-end development.
+Flask: A lightweight web framework designed for building RESTful APIs.
+SQLite: A self-contained, serverless database engine.
 
-## Setup Instructions
+###Key Features
 
-### Prerequisites
-- Ensure you have Python 3 and SQLite installed on your machine.
+Management of the user profile: storage of user, skill, and preference 
+information.
+Management of job postings: storage of job details and requirements.
+The recommendation engine: compares user profiles with active job 
+postings.
+An easy-to-use API that the clients can manipulate to convert with the 
+service.
 
-### Steps to Set Up
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yusrakhan12/job_recommendation.git
-   cd https://github.com/yusrakhan12/job_recommendation.git
+###Prerequisites
 
+Make sure that you have installed Python 3 and SQLite on your machine.
+###A guide to setup: 
+1. Clone the Repository
 
-2.Install Dependencies: Make sure you have Python and pip installed, then 
-run:
---pip install Flask
+git clone https://github.com/yusrakhan12/job_recommendation.git 
+cd job_recommendation
 
+2.Now that you have cloned the repo, let's go ahead and install the 
+dependencies
 
-3.Set Up the Database: Ensure your SQLite database is created and 
-populated with job postings. You may need to run a setup script if provided.
-Add the Database Setup Code: Copy and paste the following code into 
-setup_database.py:
-###import sqlite3
+pip install Flask
 
-# Connect to SQLite database (or create it)
+3.You need a database set up, with job postings inside. If a setup script 
+was provided, make sure to run it.
+
+4. verify the connection
+
+import sqlite3
+
+#Connect to SQLite database (or create it)
+
 conn = sqlite3.connect('jobs.db')
 
-# Create a cursor object
+#Create a cursor object
+
 cursor = conn.cursor()
+#Create a table for job postings
+cursor.execute(''' CREATE TABLE IF NOT EXISTS job_postings ( job_id 
+INTEGER PRIMARY KEY, job_title TEXT NOT NULL, company TEXT NOT NULL, 
+required_skills TEXT NOT NULL, location TEXT NOT NULL, job_type TEXT NOT 
+NULL, experience_level TEXT NOT NULL ) ''') 
 
-# Create a table for job postings
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS job_postings (
-    job_id INTEGER PRIMARY KEY,
-    job_title TEXT NOT NULL,
-    company TEXT NOT NULL,
-    required_skills TEXT NOT NULL,
-    location TEXT NOT NULL,
-    job_type TEXT NOT NULL,
-    experience_level TEXT NOT NULL
-)
-''')
+Insert mock job postings
 
-# Insert mock job postings
-job_postings = [
-    (1, "Software Engineer", "Tech Solutions Inc.", "JavaScript, React, 
-Node.js", "San Francisco", "Full-Time", "Intermediate"),
-    (2, "Data Scientist", "Data Analytics Corp.", "Python, Data Analysis, 
-Machine Learning", "Remote", "Full-Time", "Intermediate"),
-    (3, "Frontend Developer", "Creative Designs LLC", "HTML, CSS, 
-JavaScript, Vue.js", "New York", "Part-Time", "Junior"),
-    (4, "Backend Developer", "Web Services Co.", "Python, Django, REST 
-APIs", "Chicago", "Full-Time", "Senior"),
-    (5, "Machine Learning Engineer", "AI Innovations", "Python, Machine 
-Learning, TensorFlow", "Boston", "Full-Time", "Intermediate"),
-    (6, "DevOps Engineer", "Cloud Networks", "AWS, Docker, Kubernetes", 
-"Seattle", "Full-Time", "Senior"),
-    (7, "Full Stack Developer", "Startup Hub", "JavaScript, Node.js, 
-Angular, MongoDB", "Austin", "Full-Time", "Intermediate"),
-    (8, "Data Analyst", "Finance Analytics", "SQL, Python, Tableau", "New 
-York", "Full-Time", "Junior"),
-    (9, "Quality Assurance Engineer", "Reliable Software", "Selenium, 
-Java, Testing", "San Francisco", "Contract", "Intermediate"),
-    (10, "Systems Administrator", "Enterprise Solutions", "Linux, 
-Networking, Shell Scripting", "Remote", "Full-Time", "Senior")
-]
-
-# Insert the mock data into the database
-cursor.executemany('''
-INSERT INTO job_postings (job_id, job_title, company, required_skills, 
-location, job_type, experience_level)
-VALUES (?, ?, ?, ?, ?, ?, ?)
-''', job_postings)
-
-# Commit the changes and close the connection
-conn.commit()
-conn.close()
-
-print("Database setup complete and job postings inserted.")
-####
-Run the Database Setup Script
+job_postings = [ (1, "Software Engineer", "Tech Solutions Inc.", 
+"JavaScript, React, Node.js", "San Francisco", "Full-Time", 
+"Intermediate"), (2, "Data Scientist", "Data Analytics Corp.", "Python, 
+Data Analysis, Machine Learning", "Remote", "Full-Time", "Intermediate"), 
+(3, "Frontend Developer", "Creative Designs LLC", "HTML, CSS, JavaScript, 
+Vue.js", "New York", "Part-Time", "Junior"), (4, "Backend Developer", "Web 
+Services Co.", "Python, Django, REST APIs", "Chicago", "Full-Time", 
+"Senior"), (5, "Machine Learning Engineer", "AI Innovations", "Python, 
+Machine Learning, TensorFlow", "Boston", "Full-Time", "Intermediate"), (6, 
+"DevOps Engineer", "Cloud Networks", "AWS, Docker, Kubernetes", "Seattle", 
+"Full-Time", "Senior"), (7, "Full Stack Developer", "Startup Hub", 
+"JavaScript, Node.js, Angular, MongoDB", "Austin", "Full-Time", 
+"Intermediate"), (8, "Data Analyst", "Finance Analytics", "SQL, Python, 
+Tableau", "New York", "Full-Time", "Junior"), (9, "Quality Assurance 
+Engineer", "Reliable Software", "Selenium, Java, Testing", "San 
+Francisco", "Contract", "Intermediate"), (10, "Systems Administrator", 
+"Enterprise Solutions", "Linux, Networking, Shell Scripting", "Remote", 
+"Full-Time", "Senior") ]
 
 
-4.Run the Application: Start the Flask server:
---python app.py
+5.Insert the mock data into the database
+
+cursor.executemany(''' INSERT INTO job_postings (job_id, job_title, 
+company, required_skills, location, job_type, experience_level) VALUES (?, 
+?, ?, ?, ?, ?, ?) ''', job_postings)
 
 
-5.Access the API: The API will be available at 
-http://127.0.0.1:5000/recommend
 
-Tested the API using cURL
-###curl -X POST http://127.0.0.1:5000/recommend \
--H "Content-Type: application/json" \
--d '{
-    "skills": ["JavaScript"],
-    "experience_level": "Intermediate",
-    "preferences": {
-        "locations": ["San Francisco"],
-        "job_type": "Full-Time"
-    }
-}'
-####
-7.got the output as ----
-[
-  {
-    "company": "Tech Solutions Inc.",
-    "experience_level": "Intermediate",
-    "job_title": "Software Engineer",
-    "job_type": "Full-Time",
-    "location": "San Francisco",
-    "required_skills": [
-      "JavaScript",
-      "React",
-      "Node.js"
-    ]
-  }
-]
-----
-8.  Matching Logic
-## Matching Logic
-The recommendation algorithm matches users with job postings based on:
-- **Skills Matching**: Compares the user's skills against required skills 
-for each job posting.
-- **Experience Level**: Ensures that the experience level of the user 
-aligns with the job requirements.
-- **Job Type and Location**: Filters job postings based on user 
-preferences for job type and location.
+6.Commit changes and Close Connection
 
-9.
-## Challenges Faced
-1. **Data Validation**: Ensuring proper input format was crucial to avoid 
-runtime errors. I implemented error handling to return meaningful messages 
-for incorrect inputs.
-2. **Database Connection**: Managing database connections and ensuring 
-proper closure was a challenge. I utilized context managers for better 
-handling.
-3. **Testing the API**: Ensuring the API returned accurate recommendations 
-required multiple test cases. I developed unit tests to cover various 
-scenarios.
+conn.commit() conn.close()
+
+print("Setup Database and Insert Job Posted")
 
 
-10.
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) 
-file for more details.
 
+7.Call the API It will be live at http://127.0.0.1:5000/recommend
+
+8.Testing the API
+
+To test the API, curl can be used.
+
+This will give you a JSON response of the available job postings.
+
+####Matching Logic
+
+The recommendation algorithm connects users to job postings with the 
+following criteria:
+
+Skills Matching: Each job posting on the platform has a list of required 
+skills, and this test compares a user's skills against these available 
+jobs.
+
+Experience Level: Requires matching the user's experience level with the 
+job requirements.
+
+Job Type and Location: With this filter user would enable the job postings 
+based on their Job Type filters in specific Location only.
